@@ -4,6 +4,10 @@ import family_tree.FamilyTree;
 
 public class Main {
     public static void main(String[] args) {
+        /*
+        Чтобы создать отдельное семейное древо надо создать отдельный конструктор без параметров к классу FamilyTree.
+         */
+
         FamilyTree romanovy = new FamilyTree();
 
         romanovy.addRelation("Мария", "дочь", "Иван");
@@ -24,9 +28,13 @@ public class Main {
         petrovy.addRelation("Иван", "рожден", "12.08.1956");
         petrovy.addRelation("Татьяна", "рожден", "13.07.1982");
 
-        petrovy.getChildren();
-
-        //petrovy.showAll();
-
+        //petrovy.getChildren();
+        //petrovy.getAge("Иван");
+         //petrovy.showAll();
+        //petrovy.getParents();
+        //petrovy.deleteRelation(String value);
+         //petrovy.question("Елена", "дочь", "Галина");
+         //petrovy.question("Елена", "дочь");
+         //petrovy.question("Елена");
      }
 }

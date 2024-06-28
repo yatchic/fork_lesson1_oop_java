@@ -6,15 +6,16 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class FamilyTree  implements Relation {
-     private final HashMap<Integer, FamilyTree> familyTree = new HashMap<>();
-
-    private String person = "";
-    private String relationType= "";;
-    private  String relatedTo= "";;
+public class FamilyTree extends DateClass   implements Relation {
+    private final HashMap<Integer, FamilyTree> familyTree = new HashMap<>();
+    private String person="";
+    private String relationType="";
+    private  String relatedTo="";
     private  Integer id=0;
     private String otvet="";
     private StringBuilder sb=new StringBuilder();
+    private Integer key=0;
+    private FamilyTree value=null;
     @Override
     public void deb(String pometka, Object obj){
           System.out.println(pometka+obj);
@@ -25,10 +26,10 @@ public class FamilyTree  implements Relation {
         this.person = person;
     }
 
-    public FamilyTree() {
-
-    }
-
+    public FamilyTree() {}
+    /**
+     * Добавляет родственную связь в базу данных созданной конструктором.
+     */
     @Override
     public void addRelation(String person, String relationType, String relatedTo) {
 
@@ -37,7 +38,9 @@ public class FamilyTree  implements Relation {
 
 
 
-
+    /**
+     * Выводит в консоль ответ относительно одного отношения в любой комбинации из базы данных созданной конструктором.
+     */
     @Override
     public void question(String relation) {
         sb.setLength(0);
@@ -66,7 +69,9 @@ public class FamilyTree  implements Relation {
 
 
 
-
+    /**
+     * Выводит в консоль ответ относительно двух отношений в любой комбинации из базы данных созданной конструктором.
+     */
     @Override
     public void question(String first, String second){
         otvet="ничего";
@@ -103,7 +108,9 @@ public class FamilyTree  implements Relation {
          otvet=sb.toString();
         show();
         }
-
+    /**
+     * Выводит в консоль ответ относительно трех отношений в любой комбинации из базы данных созданной конструктором.
+     */
     @Override
     public void question(String first, String second, String third) {
         otvet="ничего";
@@ -127,15 +134,21 @@ public class FamilyTree  implements Relation {
     public String toString() {
         return otvet;
     }
-
+    /**
+     * Выводит в консоль содержимое данной базы данных созданной конструктором.
+     */
     @Override
     public void showAll() {
         for (Map.Entry<Integer, FamilyTree> entry : familyTree.entrySet()) {
-            Integer key = entry.getKey();
-            FamilyTree value = entry.getValue();
-            System.out.println( key  +", " + value.person + ", " + value.relationType + ", " + value.relatedTo);
+              key = entry.getKey();
+              value = entry.getValue();
+             System.out.println( key  +", " + value.person + ", " + value.relationType + ", " + value.relatedTo);
+
         }
     }
+    /**
+     * Удаляет отношение или отношения по заданному имени или отношению данной базы данных созданной конструктором.
+     */
     @Override
     public void deleteRelation(String value) {
         Set<Integer> keysToRemove = new HashSet<>();
@@ -149,30 +162,11 @@ public class FamilyTree  implements Relation {
             familyTree.remove(key);
         }
     }
-    @Override
-    public int raznitsaVremeni(String birthDateStr, String deathDateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date birthDate = dateFormat.parse(birthDateStr);
-            Date deathDate = dateFormat.parse(deathDateStr);
-            LocalDate localBirthDate = birthDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-            LocalDate localDeathDate = deathDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-            Period period = Period.between(localBirthDate, localDeathDate);
-            return period.getYears();
-        } catch (ParseException e) {
-            return 0;
-        }
-    }
-    @Override
-    public long dataConvertToLond(String dateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date date = dateFormat.parse(dateStr);
-            return date.getTime();
-        } catch (ParseException e) {
-            return -1;
-        }
-    }
+
+
+    /**
+     * Возвращает родителей данной базы данных созданной конструктором.
+     */
     @Override
 public void getParents(){
     sb.setLength(0);
@@ -189,9 +183,12 @@ public void getParents(){
         show();
 
 }
-
+    /**
+     * Возвращает возраст по заданному имени в данной базе данных созданной конструктором.
+     */
     @Override
     public void getAge(String person){
+
         sb.setLength(0);
         String birth="";
         String die="nothing";
@@ -217,29 +214,6 @@ public void getParents(){
         otvet=age.toString();
         show();
     }
-
-
-
-    /**
-     * Вычетает в данной базе данных созданной конструктором.
-     */
-    @Override
-    public int calculateAge(String birthDateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date birthDate = dateFormat.parse(birthDateStr);
-            LocalDate localBirthDate = birthDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-            LocalDate today = LocalDate.now();
-            Period period = Period.between(localBirthDate, today);
-            return period.getYears();
-        } catch (ParseException e) {
-            return 0;
-        }
-    }
-    /**
-     * Возвращает возраст по заданному имени в данной базе данных созданной конструктором.
-     */
-
 
     /**
      * Возвращает всех детей данной базы данных созданной конструктором.

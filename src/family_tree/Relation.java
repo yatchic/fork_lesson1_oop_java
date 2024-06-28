@@ -22,13 +22,12 @@ package family_tree;
 
       void deleteRelation(String value);
 
-      int raznitsaVremeni(String birthDateStr, String deathDateStr);
 
-      long dataConvertToLond(String dateStr);
+
+
 
       void getParents();
 
-      int calculateAge(String birthDateStr);
 
       void getAge(String person);
 
