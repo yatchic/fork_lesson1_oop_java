@@ -1,13 +1,11 @@
 package family_tree;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
+import java.io.*;
+
 import java.util.*;
 
-public class FamilyTree extends DateClass   implements Relation {
-    private final HashMap<Integer, FamilyTree> familyTree = new HashMap<>();
+public class FamilyTree extends DateClass   implements Relation, Serializable {
+    private   HashMap<Integer, FamilyTree> familyTree = new HashMap<>();
     private String person="";
     private String relationType="";
     private  String relatedTo="";
@@ -27,6 +25,40 @@ public class FamilyTree extends DateClass   implements Relation {
     }
 
     public FamilyTree() {}
+
+
+    /**
+     * Сохраняет содержимое HashMap на жесткий диск.
+     * @param fileName
+     */
+    public void write(String fileName) {
+        try (FileOutputStream fileOut = new FileOutputStream(fileName);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(this.familyTree);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Перезаписывает содержимым с жесткого диска в HashMap.
+     * @param fileName
+     */
+    public void read(String fileName) {
+        try (FileInputStream fileIn = new FileInputStream(fileName);
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            HashMap<Integer, FamilyTree> restoredFamilyTree = (HashMap<Integer, FamilyTree>) in.readObject();
+            this.familyTree = restoredFamilyTree;
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     /**
      * Добавляет родственную связь в базу данных созданной конструктором.
      */

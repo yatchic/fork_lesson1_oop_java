@@ -28,9 +28,11 @@ public class Main {
         petrovy.addRelation("Иван", "рожден", "12.08.1956");
         petrovy.addRelation("Татьяна", "рожден", "13.07.1982");
 
-        //petrovy.getChildren();
+       //petrovy.write("D:\\загрузки\\familyTrees\\petrovy.txt");
+        //petrovy.read("D:\\загрузки\\familyTrees\\petrovy.txt");
+         //petrovy.getChildren();
         //petrovy.getAge("Иван");
-         //petrovy.showAll();
+        //petrovy.showAll();
         //petrovy.getParents();
         //petrovy.deleteRelation(String value);
          //petrovy.question("Елена", "дочь", "Галина");
