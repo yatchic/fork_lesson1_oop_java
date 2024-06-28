@@ -1,36 +1,32 @@
 package ru.gb.vending_machine;
 
-import ru.gb.vending_machine.products.Bottle;
-import ru.gb.vending_machine.products.HotDrink;
-import ru.gb.vending_machine.products.Product;
-import ru.gb.vending_machine.vending.HotDrinkVendingMachine;
-import ru.gb.vending_machine.vending.VendingMachine;
+import family_tree.FamilyTree;
 
 public class Main {
     public static void main(String[] args) {
+        FamilyTree romanovy = new FamilyTree();
 
-        VendingMachine vendingMachine = new VendingMachine(123);
-
-        Product product1 = new Bottle("coca-cola", 150, 1.5);
-        Product product2 = new Product("milko", 100);
-
-        vendingMachine.addProduct(product1);
-        vendingMachine.addProduct(product2);
-
-        System.out.println(vendingMachine.getProductsInfo());
+        romanovy.addRelation("Мария", "дочь", "Иван");
+        romanovy.addRelation("Иван", "отец", "Мария");
+        romanovy.addRelation("Иван", "рожден", "12.08.1956");
+        romanovy.addRelation("Мария", "рожден", "13.07.1982");
 
 
-        HotDrinkVendingMachine hotDrinkVendingMachine = new HotDrinkVendingMachine(456);
+        FamilyTree petrovy = new FamilyTree();
+        petrovy.addRelation("Иван", "сын", "Юлия");
+        petrovy.addRelation("Юлия", "рожден", "21.03.1885");
+        petrovy.addRelation("Юлия", "умерший", "18.01.1975");
+        petrovy.addRelation("Татьяна", "дочь", "Иван");
+        petrovy.addRelation("Татьяна", "дочь", "Галина");
+        petrovy.addRelation("Елена", "дочь", "Галина");
+        petrovy.addRelation("Елена", "дочь", "Иван");
+        petrovy.addRelation("Иван", "отец", "Татьяна");
+        petrovy.addRelation("Иван", "рожден", "12.08.1956");
+        petrovy.addRelation("Татьяна", "рожден", "13.07.1982");
 
-        HotDrink hotDrink1 = new HotDrink("coffee", 200, 80);
-        HotDrink hotDrink2 = new HotDrink("tea", 150, 75);
+        petrovy.getChildren();
 
-        hotDrinkVendingMachine.addProduct(hotDrink1);
-        hotDrinkVendingMachine.addProduct(hotDrink2);
+        //petrovy.showAll();
 
-
-
-
-        System.out.println(hotDrinkVendingMachine.getProductsInfo());
-    }
+     }
 }
